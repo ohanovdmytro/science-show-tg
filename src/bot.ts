@@ -1,5 +1,5 @@
 import { Bot, GrammyError, HttpError } from "grammy";
-import { sendForm } from "./middleware/sendForm";
+import { startCommand } from "./middleware/startCommand";
 import { checkMembership } from "./middleware/checkMembership";
 
 import dotenv from "dotenv";
@@ -8,8 +8,8 @@ dotenv.config();
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const bot = new Bot(BOT_TOKEN);
 
+bot.use(startCommand);
 bot.use(checkMembership);
-bot.use(sendForm);
 
 bot.catch((err) => {
   const ctx = err.ctx;
