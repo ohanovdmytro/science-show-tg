@@ -1,0 +1,23 @@
+{
+  "name": "since-show-tg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dist/bot.js",
+    "dev": "npx nodemon dist/bot.js",
+    "tsc": "npx tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "dotenv": "^16.4.5",
+    "typescript": "^5.4.3"
+  },
+  "dependencies": {
+    "grammy": "^1.21.1",
+    "nodemon": "^3.1.0"
+  }
+}
