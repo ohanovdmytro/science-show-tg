@@ -18,7 +18,7 @@ bot.catch((err) => {
   if (e instanceof GrammyError) {
     console.error("Error in request:", e.description);
   } else if (e instanceof HttpError) {
-    console.error("Could not contact Telegram:", e);
+    console.error("Could not contact Telegram:", e.message);
   } else {
     console.error("Unknown error:", e);
   }
