@@ -1,15 +1,15 @@
-import { Composer, Context, Keyboard } from "grammy";
-import type { ParseModeFlavor } from "@grammyjs/parse-mode";
+import { Composer, Keyboard } from "grammy";
+import { startText } from "../static/text";
 
-export const startCommand = new Composer<ParseModeFlavor<Context>>();
+export const startCommand = new Composer();
 
-const keyboard = new Keyboard().text("Пройти квіз 🤓").row().resized();
+const keyboard = new Keyboard()
+  .text("Пройти квіз 🤓")
+  .text("Соц мережі 📊")
+  .resized();
 
 startCommand.command("start", async (ctx) => {
-  await ctx.replyWithMarkdownV2(
-    "Натисніть *Пройти квіз 🤓* для того, щоб зареєструватися",
-    {
-      reply_markup: keyboard,
-    }
-  );
+  await ctx.reply(`${startText}`, {
+    reply_markup: keyboard,
+  });
 });

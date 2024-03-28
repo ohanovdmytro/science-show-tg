@@ -1,18 +1,28 @@
-import { Composer, Context } from "grammy";
-import type { ParseModeFlavor } from "@grammyjs/parse-mode";
+import { Composer } from "grammy";
+import {
+  followText,
+  takeQuiz,
+  noCommand,
+  socialNetworks,
+} from "../static/text";
 
-export const checkMembership = new Composer<ParseModeFlavor<Context>>();
+export const checkMembership = new Composer();
 
 checkMembership.on("message", async (ctx) => {
   const isMember = await ctx.api.getChatMember("@evrika_museum", ctx.chat.id);
 
   if (isMember.status === "left") {
-    await ctx.reply(
-      "Для того, аби пройти квіз, потрібно підписатися на канал: @evrika_museum"
-    );
+    await ctx.reply(`${followText}`);
   } else {
-    await ctx.replyWithMarkdownV2(
-      `Для того, аби пройти квіз, перейдіть у *[Google Форму](https://forms.gle/6gutsLpkVqWgjpCf8)*`
-    );
+    if (ctx.msg.text === "Пройти квіз 🤓") {
+      await ctx.reply(`${takeQuiz}`);
+      setTimeout(() => {
+        ctx.api.sendMessage(ctx.chat.id, `${socialNetworks}`);
+      }, 1000 * 60);
+    } else if (ctx.msg.text === "Соц мережі 📊") {
+      await ctx.reply(`${socialNetworks}`);
+    } else {
+      await ctx.reply(`${noCommand}`);
+    }
   }
 });

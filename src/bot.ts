@@ -1,7 +1,7 @@
 import { Bot, Context, GrammyError, HttpError } from "grammy";
 import { startCommand } from "./middleware/startCommand";
 import { checkMembership } from "./middleware/checkMembership";
-import { hydrateReply } from "@grammyjs/parse-mode";
+import { hydrateReply, parseMode } from "@grammyjs/parse-mode";
 import type { ParseModeFlavor } from "@grammyjs/parse-mode";
 
 import dotenv from "dotenv";
@@ -9,6 +9,8 @@ dotenv.config();
 
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const bot = new Bot<ParseModeFlavor<Context>>(BOT_TOKEN);
+
+bot.api.config.use(parseMode("HTML"));
 
 bot.use(hydrateReply);
 bot.use(startCommand);
