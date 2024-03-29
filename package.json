@@ -2,9 +2,8 @@
   "name": "since-show-tg",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node dist/bot.js",
     "dev": "npx nodemon dist/bot.js",
     "tsc": "npx tsc"

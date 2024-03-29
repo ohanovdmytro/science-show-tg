@@ -1,4 +1,4 @@
-import { Composer } from "grammy";
+import { Composer, InlineKeyboard } from "grammy";
 import {
   followText,
   takeQuiz,
@@ -8,6 +8,11 @@ import {
 
 export const checkMembership = new Composer();
 
+const keyboard = new InlineKeyboard().url(
+  "Розпочати квіз 🚀",
+  "https://forms.gle/6gutsLpkVqWgjpCf8"
+);
+
 checkMembership.on("message", async (ctx) => {
   const isMember = await ctx.api.getChatMember("@evrika_museum", ctx.chat.id);
 
@@ -15,7 +20,7 @@ checkMembership.on("message", async (ctx) => {
     if (isMember.status === "left") {
       await ctx.reply(`${followText}`);
     } else {
-      await ctx.reply(`${takeQuiz}`);
+      await ctx.reply(`${takeQuiz}`, { reply_markup: keyboard });
       setTimeout(() => {
         ctx.api.sendMessage(ctx.chat.id, `${socialNetworks}`);
       }, 1000 * 60);
